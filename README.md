@@ -60,5 +60,5 @@ Adding File I/O to enable persistent storage of courses, students, and subjects 
 ## Usage
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/John-0-6/Student-Enrollment-System.git
+```bash
+git clone https://github.com/John-0-6/Student-Enrollment-System.git
