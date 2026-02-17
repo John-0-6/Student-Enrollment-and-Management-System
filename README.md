@@ -3,7 +3,11 @@ A console-based Student Enrollment and Grade System built in Java. This system a
 
 ---
 
-(still work in progress)
+(Work in Progress: This project is a console-based Student Enrollment and Grade System. The current focus is on:
+
+Refactoring with helper methods to reduce repetitive code and improve readability.
+
+Adding File I/O to enable persistent storage of courses, students, and subjects between program runs.)
 
 ## Features
 
