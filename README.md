@@ -14,8 +14,9 @@ Adding File I/O to enable persistent storage of courses, students, and subjects 
 - Add new **Courses** and **Subjects**  
 - Add new **Students** with auto-generated IDs  
 - Assign students to **Courses**  
-- View **student reports** with grades  
-- List all **Courses** and their students  
+- **Assign grades** to students per subject ✅ *(New feature)*  
+- View **student reports** with grades ✅ *(New feature)*  
+- List all **Courses** and enrolled students  
 - Input validation for empty fields and invalid choices  
 
 ---
@@ -27,14 +28,16 @@ Adding File I/O to enable persistent storage of courses, students, and subjects 
 - Repositories (`StudentRepository`, `CourseRepository`) for managing collections  
 - Utility classes (`IdGenerator`) for generating unique student IDs  
 - Separation of concerns: `Main` handles UI, repositories handle data  
+- Collections: `ArrayList` for storing courses, students, and subjects  
+- Maps: `HashMap` for storing grades per subject  
 
 ---
 
 ## Technologies Used
 
 - Java  
-- `Scanner` for user input  
-- `ArrayList` for collections  
+- `Scanner` for console input  
+- `ArrayList` and `HashMap` for collections  
 - `LocalDate` & `DateTimeFormatter` for ID generation  
 
 ---
@@ -42,18 +45,19 @@ Adding File I/O to enable persistent storage of courses, students, and subjects 
 ## How It Works
 
 1. **Main Menu** provides options:  
-   - Add Course  
-   - Add Student  
-   - Assign Grade  
-   - View Student Report  
-   - List All Courses  
-   - List All Students  
-   - Exit Program  
+   1. Add Course  
+   2. Add Student  
+   3. Assign Grade ✅  
+   4. View Student Report ✅  
+   5. List All Courses  
+   6. List All Students  
+   7. Exit Program  
 
 2. Courses can have multiple **Subjects**.  
 3. Students are automatically assigned a **unique ID**.  
 4. Students are assigned to **courses** upon creation.  
-5. Courses store lists of **enrolled students** and their subjects.  
+5. **Grades** can be assigned per subject for each student.  
+6. **Student reports** show all subjects and assigned grades.  
 
 ---
 
@@ -61,4 +65,4 @@ Adding File I/O to enable persistent storage of courses, students, and subjects 
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/John-0-6/Student-Enrollment-and-Management-System.git
+git clone https://github.com/John-0-6/Student-Enrollment-System.git
