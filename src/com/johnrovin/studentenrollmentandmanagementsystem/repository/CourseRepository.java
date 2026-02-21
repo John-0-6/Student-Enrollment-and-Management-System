@@ -27,9 +27,13 @@ public class CourseRepository {
     }
   }
 
-  public Course findCourseByName(String name) {
+  public boolean hasCourses(){
+    return !courses.isEmpty();
+  }
+
+  public Course findCourseByName(String name){
     for (Course course : courses) {
-      if (course.toString().equalsIgnoreCase(name)) {
+      if (course.toString().equalsIgnoreCase(name)){
         return course;
       }
     }
