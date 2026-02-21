@@ -1,6 +1,7 @@
 package com.johnrovin.studentenrollmentandmanagementsystem.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
 
@@ -9,7 +10,7 @@ public class Course {
   private ArrayList<Subject> subjects;
   private ArrayList<Student> students;
 
-  public Course(String courseName) {
+  public Course(String courseName){
     this.courseName = courseName;
     subjects = new ArrayList<>();
     students = new ArrayList<>();
@@ -23,30 +24,38 @@ public class Course {
     students.add(student);
   }
 
-  public void showSubjects() {
-    if (subjects.isEmpty()) {
+  public void showSubjects(){
+    if(subjects.isEmpty()){
       System.out.println("No Subjects in this Course.");
       return;
     }
 
-    for (Subject subject : subjects) {
+    for(Subject subject : subjects){
       System.out.println("- " + subject);
     }
   }
 
-  public void showStudents() {
-    if (students.isEmpty()) {
+  public void showStudents(){
+    if(students.isEmpty()){
       System.out.println("No Student/s in this Course.");
       return;
     }
 
-    for (Student student : students) {
+    for(Student student : students){
       System.out.println("- " + student);
     }
   }
 
+  public boolean hasStudent(){
+    return !students.isEmpty();
+  }
+
+  public ArrayList<Subject> getSubjects() {
+    return subjects;
+  }
+
   @Override
-  public String toString() {
+  public String toString(){
     return courseName;
   }
 }
