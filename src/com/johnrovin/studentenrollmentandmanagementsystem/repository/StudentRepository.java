@@ -26,4 +26,18 @@ public class StudentRepository {
       System.out.println(student);
     }
   }
+
+  public boolean hasStudents(){
+    return !students.isEmpty();
+  }
+
+  public Student findStudentByName(String fullName){
+    for (Student student : students) {
+      String studentFullName = student.getLastName() + ", " + student.getFirstName();
+      if (studentFullName.equalsIgnoreCase(fullName.trim())) {
+        return student;
+      }
+    }
+    return null;
+  }
 }
