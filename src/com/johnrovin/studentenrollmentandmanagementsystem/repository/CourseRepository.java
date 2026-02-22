@@ -39,4 +39,8 @@ public class CourseRepository {
     }
     return null;
   }
+
+  public ArrayList<Course> getCourses(){
+    return courses;
+  }
 }
