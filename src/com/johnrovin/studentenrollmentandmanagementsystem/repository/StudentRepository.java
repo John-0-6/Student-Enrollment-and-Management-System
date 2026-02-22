@@ -31,6 +31,10 @@ public class StudentRepository {
     return !students.isEmpty();
   }
 
+  public ArrayList<Student> getStudents() {
+    return students;
+  }
+
   public Student findStudentByName(String fullName){
     for (Student student : students) {
       String studentFullName = student.getLastName() + ", " + student.getFirstName();
