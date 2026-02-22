@@ -63,8 +63,8 @@ public class Student {
   public Course getCourse(){
     return course;
   }
-  public Double getGrade(){
-    return grade;
+  public Map<Subject, Double> getGrades(){
+    return grades;
   }
 
   @Override
