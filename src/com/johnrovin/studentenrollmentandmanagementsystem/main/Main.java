@@ -157,7 +157,7 @@ public class Main {
             while(true){
               System.out.println("""
               ~~~~~~~~~
-              Course/s:
+              Course/s
               ~~~~~~~~~""");
               courseRepository.showCourses();
               System.out.println("");
@@ -200,7 +200,7 @@ public class Main {
 
             System.out.println("""
             ~~~~~~~~~
-            Course/s:
+            Course/s
             ~~~~~~~~~""");
             courseRepository.showCourses();
             System.out.println("");
@@ -221,14 +221,16 @@ public class Main {
                 System.out.println("No Students Enrolled in this Course.\n");
                 continue;
               }
-
               break;
             }
 
 
             Student selectedStudent;
             while(true){
-              System.out.println("");
+              System.out.println("""
+              ~~~~~~~~~~
+              Student/s
+              ~~~~~~~~~~""");
               selectedCourseGrade.showStudents();
 
               System.out.println("\nUse Full Name (Lastname, Firstname)");
@@ -241,32 +243,56 @@ public class Main {
                 System.out.println("Student not Found.");
                 continue;
               }
-
-              System.out.println("Subjects for " + selectedStudent.getFirstName() + ":");
-              int index = 1;
-              for(Subject subject : selectedStudent.getSubjects()){
-                System.out.println(index++ + ". " + subject);
-              }
-
               break;
             }
 
             while(true){
               try{
-                System.out.print("\nSelect Subject number to assign grade: ");
-                int subjectChoice = scanner.nextInt();
-                scanner.nextLine();
+                boolean assigningGrade = true;
+                while (assigningGrade) {
+                  String answer;
+                  while (true) {
+                    System.out.println("\nSubjects for " + selectedStudent.getFirstName() + ":");
+                    int index = 1;
+                    for(Subject subject : selectedStudent.getSubjects()){
+                      System.out.println(index++ + ". " + subject);
+                    }
 
-                Subject chosenSubject = selectedStudent.getSubjects().get(subjectChoice - 1);
+                    System.out.print("\nSelect Subject number to assign grade: ");
+                    int subjectChoice = scanner.nextInt();
+                    scanner.nextLine();
 
-                System.out.print("Enter grade for " + chosenSubject + ": ");
-                double grade = scanner.nextDouble();
-                scanner.nextLine();
+                    if (subjectChoice > selectedStudent.getSubjects().size()) {
+                      System.out.println("Invalid Input.\n");
+                      continue;
+                    }
 
-                selectedStudent.assignGrade(chosenSubject, grade);
+                    Subject chosenSubject = selectedStudent.getSubjects().get(subjectChoice - 1);
 
-                System.out.println("Grade Assigned Successfully!");
+                    System.out.print("Enter grade for " + chosenSubject + ": ");
+                    double grade = scanner.nextDouble();
+                    scanner.nextLine();
 
+                    selectedStudent.assignGrade(chosenSubject, grade);
+
+                    System.out.println("Grade Assigned Successfully!\n");
+
+                    while (true) {
+                      System.out.print("Assign Another Grade? (y/n): ");
+                      answer = scanner.nextLine();
+
+                      if (answer.equalsIgnoreCase("n")) {
+                        assigningGrade = false;
+                        break;
+                      } else if (answer.equalsIgnoreCase("y")) {
+                        break;
+                      } else {
+                        System.out.println("Invalid Choice.\n");
+                      }
+                    }
+                    break;
+                  }
+                }
                 break;
               }
               catch(InputMismatchException e){
@@ -294,18 +320,28 @@ public class Main {
 
             Student student;
             while(true){
-              System.out.print("Enter Student Full Name: ");
+              System.out.println("""
+              ~~~~~~~~~
+              Student/s
+              ~~~~~~~~~""");
+              studentRepository.showStudents();
+
+              System.out.print("\nEnter Student Full Name: ");
               String fullName = scanner.nextLine();
               student = studentRepository.findStudentByName(fullName);
 
               if(student == null){
-                System.out.println("Student not found.");
+                System.out.println("Wrong Format or No Student Found.");
                 continue;
               }
               break;
             }
 
-            System.out.println("\n--- Student Report ---");
+            System.out.println("""
+              
+              ~~~~~~~~~~~~~~
+              Student Report
+              ~~~~~~~~~~~~~~""");
             System.out.println("ID: " + student.getId());
             System.out.println("Name: " + student.getLastName() + ", " + student.getFirstName());
             System.out.println("Age: " + student.getAge());
@@ -324,9 +360,9 @@ public class Main {
           try{
             while(true){
               System.out.println("""
-            ~~~~~~~~~
-            Course/s:
-            ~~~~~~~~~""");
+              ~~~~~~~~~
+              Course/s
+              ~~~~~~~~~""");
               courseRepository.showCourses();
               System.out.println("");
 
@@ -340,7 +376,7 @@ public class Main {
                 continue;
               }
               else{
-                System.out.println("Subjects under " + openCourse + ":");
+                System.out.println("Subjects" + " (" + openCourse + ")");
                 selectedCourseOpen.showSubjects();
                 System.out.println("");
                 selectedCourseOpen.showStudents();
@@ -356,10 +392,15 @@ public class Main {
           break;
 
         case 6:
+          System.out.println("""
+            ~~~~~~~~~
+            Student/s
+            ~~~~~~~~~""");
           studentRepository.showStudents();
           break;
 
         case 7:
+          System.out.println("----- Exiting Program -----");
           running = false;
           break;
       }
