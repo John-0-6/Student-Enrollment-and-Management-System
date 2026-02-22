@@ -5,6 +5,7 @@ import com.johnrovin.studentenrollmentandmanagementsystem.model.Student;
 import com.johnrovin.studentenrollmentandmanagementsystem.model.Subject;
 import com.johnrovin.studentenrollmentandmanagementsystem.repository.CourseRepository;
 import com.johnrovin.studentenrollmentandmanagementsystem.repository.StudentRepository;
+import com.johnrovin.studentenrollmentandmanagementsystem.service.FileService;
 import com.johnrovin.studentenrollmentandmanagementsystem.util.IdGenerator;
 
 import java.util.InputMismatchException;
@@ -15,6 +16,9 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
     StudentRepository studentRepository = new StudentRepository();
     CourseRepository courseRepository = new CourseRepository();
+
+    FileService.loadCourses(courseRepository);
+    FileService.loadStudents(studentRepository, courseRepository);
 
     System.out.println("""
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,7 +56,7 @@ public class Main {
             Course course;
             while(true){
               System.out.print("Enter Course: ");
-              courseName = scanner.nextLine();
+              courseName = scanner.nextLine().toUpperCase();
 
               if(courseName.isBlank()){
                 System.out.println("Course cannot be Empty.\n");
@@ -70,7 +74,7 @@ public class Main {
               String answer;
               while(true){
                 System.out.print("Enter Subject Name: ");
-                subjectName = scanner.nextLine();
+                subjectName = scanner.nextLine().toUpperCase();
 
                 if(subjectName.isBlank()){
                   System.out.println("Subject cannot be Empty.\n");
@@ -112,7 +116,7 @@ public class Main {
             String lastName;
             while(true){
               System.out.print("Enter Lastname: ");
-              lastName = scanner.nextLine();
+              lastName = scanner.nextLine().toUpperCase();
 
               if(lastName.isBlank()){
                 System.out.println("Lastname cannot be Empty.\n");
@@ -124,7 +128,7 @@ public class Main {
             String firstName;
             while(true){
               System.out.print("Enter Firstname: ");
-              firstName = scanner.nextLine();
+              firstName = scanner.nextLine().toUpperCase();
 
               if(firstName.isBlank()){
                 System.out.println("Firstname cannot be Empty.\n");
@@ -163,7 +167,7 @@ public class Main {
               System.out.println("");
 
               System.out.print("Enter Course: ");
-              selectedCourseName = scanner.nextLine();
+              selectedCourseName = scanner.nextLine().toUpperCase();
 
               if(selectedCourseName.isBlank()){
                 System.out.println("Course name cannot be Empty.\n");
@@ -208,7 +212,7 @@ public class Main {
             Course selectedCourseGrade;
             while(true){
               System.out.print("Choose Course: ");
-              String selectedCourse = scanner.nextLine();
+              String selectedCourse = scanner.nextLine().toUpperCase();
 
               selectedCourseGrade = courseRepository.findCourseByName(selectedCourse);
 
@@ -235,7 +239,7 @@ public class Main {
 
               System.out.println("\nUse Full Name (Lastname, Firstname)");
               System.out.print("Select Student: ");
-              String studentName = scanner.nextLine();
+              String studentName = scanner.nextLine().toUpperCase();
 
               selectedStudent = studentRepository.findStudentByName(studentName);
 
@@ -327,7 +331,7 @@ public class Main {
               studentRepository.showStudents();
 
               System.out.print("\nEnter Student Full Name: ");
-              String fullName = scanner.nextLine();
+              String fullName = scanner.nextLine().toUpperCase();
               student = studentRepository.findStudentByName(fullName);
 
               if(student == null){
@@ -367,7 +371,7 @@ public class Main {
               System.out.println("");
 
               System.out.print("Choose a Course to open: ");
-              String openCourse = scanner.nextLine();
+              String openCourse = scanner.nextLine().toUpperCase();
 
               Course selectedCourseOpen = courseRepository.findCourseByName(openCourse);
 
@@ -401,6 +405,8 @@ public class Main {
 
         case 7:
           System.out.println("----- Exiting Program -----");
+          FileService.saveCourses(courseRepository);
+          FileService.saveStudents(studentRepository);
           running = false;
           break;
       }
