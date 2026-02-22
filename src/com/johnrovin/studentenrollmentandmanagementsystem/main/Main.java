@@ -105,13 +105,17 @@ public class Main {
             }
           }
           catch(Exception e){
-            System.out.println("Unexpected error occurred.\n");
+            System.out.println("Unexpected Error Occurred.");
             scanner.nextLine();
           }
           break;
 
         case 2:
           try{
+            if(!courseRepository.hasCourses()){
+              System.out.println("Add Course/s First");
+              break;
+            }
             String studentId = IdGenerator.nextStudentId();
             String lastName;
             while(true){
@@ -151,7 +155,7 @@ public class Main {
                 break;
               }
               catch(Exception e){
-                System.out.println("Error");
+                System.out.println("Unexpected Error Occurred.");
                 scanner.nextLine();
               }
             }
@@ -170,14 +174,14 @@ public class Main {
               selectedCourseName = scanner.nextLine().toUpperCase();
 
               if(selectedCourseName.isBlank()){
-                System.out.println("Course name cannot be Empty.\n");
+                System.out.println("Course Name cannot be Empty.\n");
                 continue;
               }
 
               selectedCourse = courseRepository.findCourseByName(selectedCourseName);
 
               if (selectedCourse == null) {
-                System.out.println("Course not found. Please add course first.");
+                System.out.println("Course Not found. Please Add Course/s First.");
                 continue;
               }
               break;
@@ -190,7 +194,7 @@ public class Main {
             selectedCourse.addStudents(student);
           }
           catch(Exception e){
-            System.out.println("Unexpected error occurred.");
+            System.out.println("Unexpected Error Occurred.");
             scanner.nextLine();
           }
           break;
@@ -217,7 +221,7 @@ public class Main {
               selectedCourseGrade = courseRepository.findCourseByName(selectedCourse);
 
               if(selectedCourseGrade == null){
-                System.out.println("Course not Found.\n");
+                System.out.println("Course Not Found.\n");
                 continue;
               }
 
@@ -244,7 +248,7 @@ public class Main {
               selectedStudent = studentRepository.findStudentByName(studentName);
 
               if(selectedStudent == null){
-                System.out.println("Student not Found.");
+                System.out.println("Student Not Found.");
                 continue;
               }
               break;
@@ -262,7 +266,7 @@ public class Main {
                       System.out.println(index++ + ". " + subject);
                     }
 
-                    System.out.print("\nSelect Subject number to assign grade: ");
+                    System.out.print("\nSelect Subject Number to Assign Grade: ");
                     int subjectChoice = scanner.nextInt();
                     scanner.nextLine();
 
@@ -273,7 +277,7 @@ public class Main {
 
                     Subject chosenSubject = selectedStudent.getSubjects().get(subjectChoice - 1);
 
-                    System.out.print("Enter grade for " + chosenSubject + ": ");
+                    System.out.print("Enter Grade for " + chosenSubject + ": ");
                     double grade = scanner.nextDouble();
                     scanner.nextLine();
 
@@ -304,13 +308,13 @@ public class Main {
                 scanner.nextLine();
               }
               catch(Exception e){
-                System.out.println("Unexpected error occurred.");
+                System.out.println("Unexpected Error Occurred.");
                 scanner.nextLine();
               }
             }
           }
           catch(Exception e){
-            System.out.println("Unexpected error occurred.");
+            System.out.println("Unexpected Error Occurred.");
             scanner.nextLine();
           }
           break;
@@ -356,12 +360,16 @@ public class Main {
             break;
           }
           catch(Exception e){
-            System.out.println("Unexpected error occurred.");
+            System.out.println("Unexpected Error Occurred.");
             scanner.nextLine();
           }
 
         case 5:
           try{
+            if(!courseRepository.hasCourses()){
+              System.out.println("There are no Course/s");
+              break;
+            }
             while(true){
               System.out.println("""
               ~~~~~~~~~
@@ -390,7 +398,7 @@ public class Main {
             break;
           }
           catch(Exception e){
-            System.out.println("Unexpected error occurred.");
+            System.out.println("Unexpected Error Occurred.");
             scanner.nextLine();
           }
           break;
