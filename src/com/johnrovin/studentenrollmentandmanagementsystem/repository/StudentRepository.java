@@ -37,7 +37,7 @@ public class StudentRepository {
 
   public Student findStudentByName(String fullName){
     for (Student student : students) {
-      String studentFullName = student.getLastName() + ", " + student.getFirstName();
+      String studentFullName = student.getLastName() + " " + student.getFirstName();
       if (studentFullName.equalsIgnoreCase(fullName.trim())) {
         return student;
       }
