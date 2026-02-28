@@ -27,7 +27,7 @@ public class Main {
 
     boolean running = true;
     while(running){
-
+      // Main Menu
       System.out.println("\n1. Add Course");
       System.out.println("2. Add Student");
       System.out.println("3. Assign Grade");
@@ -50,6 +50,8 @@ public class Main {
       }
 
       switch(choice){
+        // Add Course
+        // Instantly add subjects of the course
         case 1:
           try{
             String courseName;
@@ -110,6 +112,8 @@ public class Main {
           }
           break;
 
+        // Enroll a Student
+        // Enroll the student in a course
         case 2:
           try{
             if(!courseRepository.hasCourses()){
@@ -199,6 +203,8 @@ public class Main {
           }
           break;
 
+        // Assign Grades
+        // Choose a course, and then choose a student to edit their grades per subject
         case 3:
           try{
             if(!courseRepository.hasCourses()){
@@ -241,7 +247,7 @@ public class Main {
               ~~~~~~~~~~""");
               selectedCourseGrade.showStudents();
 
-              System.out.println("\nUse Full Name (Lastname, Firstname)");
+              System.out.println("\nUse Full Name (Lastname + Firstname)");
               System.out.print("Select Student: ");
               String studentName = scanner.nextLine().toUpperCase();
 
@@ -319,6 +325,9 @@ public class Main {
           }
           break;
 
+        // View Student Report
+        // View specific student by choosing the course first
+        // Then select the student with the full name (lastname + firstname)
         case 4:
           try{
             if(!studentRepository.hasStudents()){
@@ -334,7 +343,7 @@ public class Main {
               ~~~~~~~~~""");
               studentRepository.showStudents();
 
-              System.out.print("\nEnter Student Full Name: ");
+              System.out.print("\nEnter Student Full Name (Lastname + FirstName): ");
               String fullName = scanner.nextLine().toUpperCase();
               student = studentRepository.findStudentByName(fullName);
 
@@ -364,6 +373,9 @@ public class Main {
             scanner.nextLine();
           }
 
+        // Show all courses that are saved
+        // Choose a course to open
+        // It will show the subjects of that course, and all the students enrolled in that course
         case 5:
           try{
             if(!courseRepository.hasCourses()){
@@ -378,8 +390,13 @@ public class Main {
               courseRepository.showCourses();
               System.out.println("");
 
+              System.out.println("Press \"Enter\" to exit");
               System.out.print("Choose a Course to open: ");
               String openCourse = scanner.nextLine().toUpperCase();
+
+              if(openCourse.isBlank()){
+                break;
+              }
 
               Course selectedCourseOpen = courseRepository.findCourseByName(openCourse);
 
@@ -403,6 +420,7 @@ public class Main {
           }
           break;
 
+        // Show all enrolled students
         case 6:
           System.out.println("""
             ~~~~~~~~~
@@ -411,6 +429,7 @@ public class Main {
           studentRepository.showStudents();
           break;
 
+        // Exits the program
         case 7:
           System.out.println("----- Exiting Program -----");
           FileService.saveCourses(courseRepository);
